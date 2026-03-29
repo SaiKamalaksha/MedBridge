@@ -50,8 +50,8 @@ def simplify_text(text: str, language: str) -> dict:
         simplified_text = text
         summary_points = _simple_summary(text)
 
-    readability_before = textstat.text_standard(text)
-    readability_after = textstat.text_standard(simplified_text)
+    readability_before = textstat.flesch_kincaid_grade(text)
+    readability_after = textstat.flesch_kincaid_grade(simplified_text)
 
     return {
         "simplified_text": simplified_text,

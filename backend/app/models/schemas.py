@@ -8,15 +8,15 @@ class SimplifyRequest(BaseModel):
 
 
 class ReadabilityScore(BaseModel):
-    before: str
-    after: str
+    before: float
+    after: float
 
 
 class Medication(BaseModel):
     name: str
     dosage: str
     time_of_day: str
-
+    warning: Optional[str] = None
 
 class SimplifyResponse(BaseModel):
     simplified_text: str

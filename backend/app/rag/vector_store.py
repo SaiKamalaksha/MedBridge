@@ -12,7 +12,10 @@ def save_index(vectors: List[List[float]], chunks: List[str]) -> None:
     if not vectors:
         return
     dim = len(vectors[0])
-    index = faiss.IndexFlatL2(dim)
+    index = faiss.IndexFlatIP(dim)  # IP = inner product = cosine when vectors are normalised
+    vectors_np = np.array(vectors).astype("float32")
+    faiss.normalize_L2(vectors_np)  # normalise before adding
+    index.add(vectors_np)
     index.add(np.array(vectors).astype("float32"))
     faiss.write_index(index, INDEX_PATH)
     with open(META_PATH, "w", encoding="utf-8") as f:
