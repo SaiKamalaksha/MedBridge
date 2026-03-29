@@ -4,20 +4,24 @@ import boto3
 from botocore.config import Config
 from ..config import settings
 
+_runtime = None
 
 def get_bedrock_runtime():
-    session_kwargs = {}
-    if settings.aws_access_key_id and settings.aws_secret_access_key:
-        session_kwargs = {
-            "aws_access_key_id": settings.aws_access_key_id,
-            "aws_secret_access_key": settings.aws_secret_access_key,
-        }
-    session = boto3.Session(**session_kwargs)
-    return session.client(
-        "bedrock-runtime",
-        region_name=settings.aws_region,
-        config=Config(retries={"max_attempts": 3, "mode": "standard"}),
-    )
+    global _runtime
+    if _runtime is None:
+        session_kwargs = {}
+        if settings.aws_access_key_id and settings.aws_secret_access_key:
+            session_kwargs = {
+                "aws_access_key_id": settings.aws_access_key_id,
+                "aws_secret_access_key": settings.aws_secret_access_key,
+            }
+        session = boto3.Session(**session_kwargs)
+        _runtime = session.client(
+            "bedrock-runtime",
+            region_name=settings.aws_region,
+            config=Config(retries={"max_attempts": 3, "mode": "standard"}),
+        )
+    return _runtime
 
 
 def embed_texts(texts: List[str]) -> List[List[float]]:
@@ -42,7 +46,7 @@ def generate_simplification(prompt: str) -> str:
         {
             "anthropic_version": "bedrock-2023-05-31",
             "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": 800,
+            "max_tokens": 2000,
             "temperature": 0.3,
         }
     )
