@@ -1,4 +1,4 @@
-﻿import { ReadabilityScore } from '../types/med'
+﻿import type { ReadabilityScore } from '../types/med'
 
 interface ReadabilityBarProps {
   score: ReadabilityScore
@@ -33,3 +33,4 @@ function ReadabilityBar({ score }: ReadabilityBarProps) {
 }
 
 export default ReadabilityBar
+

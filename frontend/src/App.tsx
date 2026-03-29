@@ -1,11 +1,12 @@
-﻿import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
+import HowItWorksPage from './pages/HowItWorksPage'
 import ImpactPage from './pages/ImpactPage'
 import InputPage from './pages/InputPage'
 import ResultsPage from './pages/ResultsPage'
 import { mockDischargeData } from './data/mockData'
-import { DischargeSummary } from './types/med'
+import type { DischargeSummary } from './types/med'
 
 function App() {
   const location = useLocation()
@@ -43,6 +44,17 @@ function App() {
             <Link className="hover:text-white" to="/impact">
               Impact
             </Link>
+            <Link className="hover:text-white" to="/how-it-works">
+              Learn More
+            </Link>
+            <select
+              className="ml-2 rounded-full border border-slate-700 bg-slate-950/70 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-slate-200 focus:border-emerald-300 focus:outline-none"
+              defaultValue="English"
+            >
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+            </select>
           </nav>
         </div>
       </header>
@@ -55,6 +67,14 @@ function App() {
               element={
                 <motion.div {...pageTransition}>
                   <InputPage onSimplify={handleSimplify} isLoading={isLoading} />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/how-it-works"
+              element={
+                <motion.div {...pageTransition}>
+                  <HowItWorksPage />
                 </motion.div>
               }
             />

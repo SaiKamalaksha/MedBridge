@@ -1,4 +1,4 @@
-﻿import { DischargeSummary } from '../types/med'
+﻿import type { DischargeSummary } from '../types/med'
 
 export const mockDischargeData: DischargeSummary = {
   readability: {
@@ -33,3 +33,4 @@ export const mockDischargeData: DischargeSummary = {
     'Severe dizziness or confusion',
   ],
 }
+

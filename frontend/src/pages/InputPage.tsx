@@ -1,6 +1,5 @@
-﻿import { useState } from 'react'
 import { FileText } from 'lucide-react'
-import LanguageSelector from '../components/LanguageSelector'
+import { Link } from 'react-router-dom'
 
 interface InputPageProps {
   onSimplify: () => Promise<void>
@@ -8,8 +7,6 @@ interface InputPageProps {
 }
 
 function InputPage({ onSimplify, isLoading }: InputPageProps) {
-  const [language, setLanguage] = useState('English')
-
   return (
     <div className="flex flex-col items-center gap-8 text-center">
       <div className="w-full rounded-3xl border border-slate-800 bg-slate-900/50 p-10 shadow-[0_20px_60px_rgba(2,6,23,0.55)]">
@@ -42,14 +39,13 @@ function InputPage({ onSimplify, isLoading }: InputPageProps) {
           >
             {isLoading ? 'Simplifying...' : 'Simplify'}
           </button>
-          <button className="text-xs uppercase tracking-[0.3em] text-slate-400">
+          <Link
+            className="text-xs uppercase tracking-[0.3em] text-slate-400 hover:text-white"
+            to="/how-it-works"
+          >
             How it Works
-          </button>
+          </Link>
         </div>
-      </div>
-
-      <div className="w-full max-w-md">
-        <LanguageSelector value={language} onChange={setLanguage} />
       </div>
     </div>
   )
