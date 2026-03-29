@@ -7,3 +7,4 @@ faiss-cpu
 textstat
 twilio
 python-dotenv
+pydantic-settings
