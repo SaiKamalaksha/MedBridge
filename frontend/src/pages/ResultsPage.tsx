@@ -5,7 +5,7 @@ import RedFlagAlerts from '../components/RedFlagAlerts'
 import SMSSender from '../components/SMSSender'
 import SummaryCard from '../components/SummaryCard'
 import { sendSms } from '../services/api'
-import { DischargeSummary } from '../types/med'
+import type { DischargeSummary } from '../types/med'
 
 interface ResultsPageProps {
   data: DischargeSummary | null
@@ -54,3 +54,4 @@ function ResultsPage({ data }: ResultsPageProps) {
 }
 
 export default ResultsPage
+

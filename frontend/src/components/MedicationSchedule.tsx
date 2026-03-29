@@ -1,5 +1,5 @@
 ﻿import { Pill } from 'lucide-react'
-import { Medication } from '../types/med'
+import type { Medication } from '../types/med'
 
 interface MedicationScheduleProps {
   medications: Medication[]
