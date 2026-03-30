@@ -23,12 +23,12 @@ function ResultsPage({ data }: ResultsPageProps) {
     )
   }
 
-  const handleSendSms = async (phoneNumber: string) => {
-    await sendSms({
-      phoneNumber,
-      message: data.summary_points.join('\n'),
-    })
-  }
+const handleSendSms = async (phoneNumber: string) => {
+  await sendSms({
+    phone: phoneNumber,
+    message: data.summary_points.join('\n'),
+  })
+}
 
   return (
     <div className="space-y-6">
