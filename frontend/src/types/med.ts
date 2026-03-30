@@ -1,17 +1,20 @@
 ﻿export interface Medication {
   name: string
   dosage: string
-  timeOfDay: 'Morning' | 'Afternoon' | 'Evening' | 'Night'
+  time_of_day: string | null
+  warning: string | null
 }
 
 export interface ReadabilityScore {
-  before: string
-  after: string
+  before: number
+  after: number
 }
 
 export interface DischargeSummary {
-  readability: ReadabilityScore
-  summaryPoints: string[]
+  simplified_text: string
+  summary_points: string[]
   medications: Medication[]
-  redFlags: string[]
+  red_flags: string[]
+  readability: ReadabilityScore
+  citations: string[]
 }

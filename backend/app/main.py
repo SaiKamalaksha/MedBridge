@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import pdf, simplify, sms
+from app.routers import pdf, simplify, sms
 
 app = FastAPI(title="MedBridge API", version="1.0.0")
 
