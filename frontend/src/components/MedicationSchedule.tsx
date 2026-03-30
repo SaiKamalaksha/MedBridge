@@ -14,7 +14,7 @@ function MedicationSchedule({ medications }: MedicationScheduleProps) {
       <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {medications.map((medication) => (
           <div
-            key={`${medication.name}-${medication.timeOfDay}`}
+            key={`${medication.name}-${medication.time_of_day}`}
             className="rounded-xl border border-slate-800 bg-slate-950/70 p-4"
           >
             <div className="text-base font-semibold text-white">
@@ -23,9 +23,16 @@ function MedicationSchedule({ medications }: MedicationScheduleProps) {
             <div className="mt-1 text-sm text-slate-300">
               {medication.dosage}
             </div>
-            <div className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">
-              {medication.timeOfDay}
-            </div>
+            {medication.time_of_day && (
+              <div className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">
+                {medication.time_of_day}
+              </div>
+            )}
+            {medication.warning && (
+              <div className="mt-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-300">
+                {medication.warning}
+              </div>
+            )}
           </div>
         ))}
       </div>

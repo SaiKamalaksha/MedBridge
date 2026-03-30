@@ -26,7 +26,7 @@ function ResultsPage({ data }: ResultsPageProps) {
   const handleSendSms = async (phoneNumber: string) => {
     await sendSms({
       phoneNumber,
-      message: data.summaryPoints.join('\n'),
+      message: data.summary_points.join('\n'),
     })
   }
 
@@ -45,13 +45,12 @@ function ResultsPage({ data }: ResultsPageProps) {
       </div>
 
       <ReadabilityBar score={data.readability} />
-      <SummaryCard title="Summary" points={data.summaryPoints} />
+      <SummaryCard title="Summary" points={data.summary_points} />
       <MedicationSchedule medications={data.medications} />
-      <RedFlagAlerts alerts={data.redFlags} />
+      <RedFlagAlerts alerts={data.red_flags} />
       <SMSSender onSend={handleSendSms} />
     </div>
   )
 }
 
 export default ResultsPage
-

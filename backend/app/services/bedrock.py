@@ -3,6 +3,7 @@ from typing import List
 import boto3
 from botocore.config import Config
 from ..config import settings
+import anthropic
 
 _runtime = None
 
@@ -41,20 +42,11 @@ def embed_texts(texts: List[str]) -> List[List[float]]:
 
 
 def generate_simplification(prompt: str) -> str:
-    runtime = get_bedrock_runtime()
-    body = json.dumps(
-        {
-            "anthropic_version": "bedrock-2023-05-31",
-            "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": 2000,
-            "temperature": 0.3,
-        }
+    client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+    message = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=2000,
+        temperature=0.3,
+        messages=[{"role": "user", "content": prompt}]
     )
-    response = runtime.invoke_model(
-        modelId=settings.bedrock_model_id,
-        body=body,
-        accept="application/json",
-        contentType="application/json",
-    )
-    payload = json.loads(response["body"].read())
-    return payload.get("content", [{}])[0].get("text", "")
+    return message.content[0].text

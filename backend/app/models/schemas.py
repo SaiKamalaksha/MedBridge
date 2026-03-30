@@ -15,7 +15,7 @@ class ReadabilityScore(BaseModel):
 class Medication(BaseModel):
     name: str
     dosage: str
-    time_of_day: str
+    time_of_day: Optional[str] = None
     warning: Optional[str] = None
 
 class SimplifyResponse(BaseModel):
